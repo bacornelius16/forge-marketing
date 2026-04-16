@@ -1,0 +1,640 @@
+
+
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge Athletics — The Performance OS for Every Athlete</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #00d4ff; 
+      --primary-dim: #00a6c9;
+      --cyan: #00d4ff;
+      --lime: #a3e635; /* Matching the lime in your logo */
+      --gold: #f0a500;
+      --bg: #0b0f12;
+      --surface: #12171b;
+      --surface2: #161c21;
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --text-dim: #94a3b8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 2.5rem;
+      background: rgba(11, 15, 18, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img {
+      height: 55px; /* Adjusted for the horizontal logo */
+      width: auto;
+      display: block;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #000;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      max-width: 1000px;
+      color: var(--primary);
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero h1 .white { color: #ffffff; }
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      max-width: 600px;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--primary);
+      color: #000;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1.1rem 2.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 212, 255, 0.45); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      color: var(--text-dim);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover { border-color: var(--text-dim); color: #fff; }
+
+    /* STATS STRIP */
+    .stats-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 3rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat-item .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1.2rem;
+      color: #fff;
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* CANADA BADGE */
+    .canada-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* GRIDS */
+    .who-grid, .features-grid, .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .who-card, .feature-card, .step, .pwa-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.2rem;
+      transition: all 0.3s ease;
+    }
+    .who-card:hover, .feature-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+    .who-icon, .feature-icon, .pwa-step-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+
+    .who-title, .feature-title, .step-title, .pwa-step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+    }
+    .who-desc, .feature-desc, .step-desc, .pwa-step-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.65; }
+
+    .feature-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--lime);
+      background: rgba(163, 230, 53, 0.08);
+      border: 1px solid rgba(163, 230, 53, 0.2);
+      padding: 0.25rem 0.7rem;
+      border-radius: 4px;
+    }
+
+    /* STEP NUMBERS */
+    .step-badge, .pwa-step-num {
+      width: 40px; height: 40px;
+      background: var(--primary);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* METRICS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 3.5rem;
+    }
+    .metric-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+    }
+    .metric-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .metric-val.gold { color: var(--gold); }
+    .metric-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.4rem; }
+    .metric-delta { font-size: 0.75rem; color: var(--lime); margin-top: 0.3rem; }
+
+    /* REPORT */
+    .report-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) { .report-layout { grid-template-columns: 1fr; gap: 2rem; } }
+    .report-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .report-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .report-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .report-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .report-row .val { font-weight: 700; color: var(--primary); }
+    .report-points { list-style: none; margin-top: 1.5rem; line-height: 2; color: var(--text-dim); }
+    .report-points li::before { content: '→ '; color: var(--lime); }
+
+    /* CTA BOX */
+    .pwa-cta-box {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+    .pwa-cta-box:hover { border-color: var(--primary); }
+    .pwa-cta-url {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo img {
+      height: 120px; /* Stacked logo for more visibility in footer */
+      width: auto;
+      margin-bottom: 1.5rem;
+    }
+    footer p { color: var(--text-dim); font-size: 0.85rem; }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: 0.6s all ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo-horizontal.png" alt="Forge Athletics">
+    </a>
+    <a href="https://app.forgeathletics.ca" class="nav-cta" target="_blank">Open App</a>
+  </nav>
+
+  <section class="hero">
+    <div class="canada-badge">🍁 Built in Canada</div>
+    <p class="hero-eyebrow">The Performance OS for Every Athlete</p>
+    <h1><span class="white">Build the Profile</span><br />Scouts Can't<br /><span class="white">Ignore.</span></h1>
+    <p class="hero-sub">Forge Athletics helps athletes of all levels organize their data, track development, and present a professional performance record to coaches and scouts.</p>
+    <div class="hero-actions">
+      <a href="https://app.forgeathletics.ca" class="btn-primary" target="_blank">⚡ Get Started Free</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+  </section>
+
+  <div class="stats-strip">
+    <div class="stat-item"><div class="num">AM+PM</div><div class="label">Daily Check-Ins</div></div>
+    <div class="stat-item"><div class="num">100%</div><div class="label">Mobile Ready</div></div>
+    <div class="stat-item"><div class="num">1</div><div class="label">Report Every Month</div></div>
+    <div class="stat-item"><div class="num">∞</div><div class="label">History Logged</div></div>
+  </div>
+
+  <section id="who">
+    <div class="section-inner">
+      <p class="section-label">Who It's For</p>
+      <h2 class="section-title">Built for the<br />Driven Athlete</h2>
+      <p class="section-desc">Whether you're an amateur just starting out or a veteran chasing a pro contract, Forge gives you the professional tools to document your journey.</p>
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-icon">🏅</span>
+          <div class="who-title">Every Level</div>
+          <p class="who-desc">From youth sports to adult leagues. If you train, you should track. Build a permanent history of your athletic life.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">🏒</span>
+          <div class="who-title">Competitive Players</div>
+          <p class="who-desc">Show scouts a complete performance profile — not just highlights. Back up your stats with hard training and readiness data.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">🥍</span>
+          <div class="who-title">Multi-Sport Mastery</div>
+          <p class="who-desc">Log primary and secondary sports. Track development across different seasons. Your full athletic profile in one unified dashboard.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">👨‍👩‍👦</span>
+          <div class="who-title">Parents & Support</div>
+          <p class="who-desc">Get a professional monthly report you can actually send to a coach or advisor. No more scrambling to compile season data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="background: var(--surface); max-width: 100%;">
+    <div class="section-inner">
+      <p class="section-label">What You Get</p>
+      <h2 class="section-title">Everything a Scout<br />Wants to See</h2>
+      <p class="section-desc">One app. Every metric that matters. Delivered as a professional report — automatically, every month.</p>
+      <div class="features-grid">
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">🏟️</span>
+          <div class="feature-title">Universal Game Tracking</div>
+          <p class="feature-desc">Log every game. Support for any position and any sport—automatically organized by game type and season.</p>
+          <span class="feature-tag">Any Sport. Any Position.</span>
+        </div>
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">🏋️</span>
+          <div class="feature-title">Strength & Training</div>
+          <p class="feature-desc">Track workouts, personal records, and volume. Your PR history builds automatically from every session. Add any custom exercise.</p>
+          <span class="feature-tag">Auto PR Detection</span>
+        </div>
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">📋</span>
+          <div class="feature-title">Daily Check-Ins</div>
+          <p class="feature-desc">Morning vitals (weight, sleep) and Evening recovery (soreness, hydration). The readiness data modern coaches demand.</p>
+          <span class="feature-tag">AM + PM Tracking</span>
+        </div>
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">📄</span>
+          <div class="feature-title">Monthly PDF Report</div>
+          <p class="feature-desc">Every month, Forge generates a professional performance PDF. Email it, print it, or share it with an advisor instantly.</p>
+          <span class="feature-tag">Auto-Generated</span>
+        </div>
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">📇</span>
+          <div class="feature-title">Recruiting CRM</div>
+          <p class="feature-desc">Track coaches, scouts, and agents. Log recruitment status — watching, video sent, or invited to camp. Your pipeline, organized.</p>
+          <span class="feature-tag">Recruitment Pipeline</span>
+        </div>
+        <div class="feature-card" style="background:var(--bg)">
+          <span class="feature-icon">📊</span>
+          <div class="feature-title">Body Composition</div>
+          <p class="feature-desc">Track body fat, muscle mass, and measurements. Proving physical development over a full season shows real commitment.</p>
+          <span class="feature-tag">Trend Over Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="section-inner">
+      <p class="section-label">The Process</p>
+      <h2 class="section-title">Log It. Track It.<br />Send It.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-badge">1</div>
+          <div class="step-title">Log Your Activity</div>
+          <p class="step-desc">After every game, workout, or practice — open Forge and log it in under 60 seconds. Build your record as you go.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge">2</div>
+          <div class="step-title">Track Your Growth</div>
+          <p class="step-desc">Watch your stats, strength, and readiness build over time. Use the dashboard to see exactly where you're improving.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge">3</div>
+          <div class="step-title">Export Your Report</div>
+          <p class="step-desc">Monthly reports are generated automatically. Or, pull a custom report anytime you have a big meeting or scout call.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge">4</div>
+          <div class="step-title">Stand Out</div>
+          <p class="step-desc">Show up with more than just a highlight reel. Prove your work ethic with documented, long-term performance data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--surface); max-width: 100%;">
+    <div class="section-inner">
+      <p class="section-label">Real Data. Real Results.</p>
+      <h2 class="section-title">Metrics That<br />Matter</h2>
+      <div class="metrics-grid">
+        <div class="metric-card"><div class="metric-val">8.2</div><div class="metric-label">Avg Sleep (hrs)</div></div>
+        <div class="metric-card"><div class="metric-val gold">325</div><div class="metric-label">Deadlift PR (lbs)</div></div>
+        <div class="metric-card"><div class="metric-val">180</div><div class="metric-label">Body Weight (lbs)</div><div class="metric-delta">↑ Peak Performance</div></div>
+        <div class="metric-card"><div class="metric-val">52</div><div class="metric-label">Resting HR (bpm)</div></div>
+        <div class="metric-card"><div class="metric-val">10.8%</div><div class="metric-label">Body Fat</div><div class="metric-delta">↓ Leaning Out</div></div>
+        <div class="metric-card"><div class="metric-val gold">58K</div><div class="metric-label">Volume (lbs)</div></div>
+        <div class="metric-card"><div class="metric-val">7.1</div><div class="metric-label">Avg RPE</div></div>
+        <div class="metric-card"><div class="metric-val">9/10</div><div class="metric-label">Wellness Score</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="report">
+    <div class="section-inner">
+      <div class="report-layout">
+        <div>
+          <p class="section-label">The Monthly Report</p>
+          <h2 class="section-title">The Document<br />That Gets You<br />Noticed</h2>
+          <p class="section-desc">Most athletes have zero documentation. Forge athletes show up with a professional PDF covering games, training, and development. That is the winning edge.</p>
+          <ul class="report-points">
+            <li>Season game stats with performance trends</li>
+            <li>Strength training volume and new PRs</li>
+            <li>Body composition and physical evolution</li>
+            <li>Daily readiness and recovery vitals</li>
+            <li>Recruiting status and contact log</li>
+            <li>Available anytime as a clean PDF</li>
+          </ul>
+        </div>
+        <div class="report-preview">
+          <div class="report-name">Athlete Performance Report</div>
+          <div class="report-meta">Level: Elite/Junior · April 2026</div>
+          <div class="report-row"><span>Season Record</span><span class="val">24 — 6 — 2</span></div>
+          <div class="report-row"><span>Games Played</span><span class="val">32 Games Logged</span></div>
+          <div class="report-row"><span>Training Sessions</span><span class="val">12 Workouts</span></div>
+          <div class="report-row"><span>Total Volume</span><span class="val">58,120 lbs</span></div>
+          <div class="report-row"><span>Top Lift PR</span><span class="val">325 lbs (↑ +10)</span></div>
+          <div class="report-row"><span>Avg Sleep</span><span class="val">8.2 hrs</span></div>
+          <div class="report-row"><span>Status</span><span class="val">Ready to Recruit</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" style="background:var(--surface2); max-width: 100%;">
+    <div class="section-inner">
+      <p class="section-label">Fast Setup</p>
+      <h2 class="section-title">On Your Phone<br />In 30 Seconds</h2>
+      <div class="steps">
+        <div class="pwa-step" style="background:var(--bg)">
+          <div class="pwa-step-num">1</div>
+          <span class="pwa-step-icon">🌐</span>
+          <div class="pwa-step-title">Open the App</div>
+          <p class="pwa-step-desc">Visit <strong style="color:var(--primary)">app.forgeathletics.ca</strong> on your mobile browser.</p>
+        </div>
+        <div class="pwa-step" style="background:var(--bg)">
+          <div class="pwa-step-num">2</div>
+          <span class="pwa-step-icon">📤</span>
+          <div class="pwa-step-title">Tap Share</div>
+          <p class="pwa-step-desc">On iPhone tap the <strong>Share</strong> icon. On Android tap the <strong>Menu</strong> icon.</p>
+        </div>
+        <div class="pwa-step" style="background:var(--bg)">
+          <div class="pwa-step-num">3</div>
+          <span class="pwa-step-icon">➕</span>
+          <div class="pwa-step-title">Add to Home Screen</div>
+          <p class="pwa-step-desc">Tap <strong>"Add to Home Screen"</strong>. Forge now lives on your phone like any native app.</p>
+        </div>
+        <div class="pwa-step" style="background:var(--bg)">
+          <div class="pwa-step-num">4</div>
+          <span class="pwa-step-icon">⚡</span>
+          <div class="pwa-step-title">Start Logging</div>
+          <p class="pwa-step-desc">Create your account and log your first session. Your record starts today.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" style="text-align:center; border-top:1px solid var(--border);">
+    <div class="section-inner">
+      <h2 class="section-title">Start Building<br />Your Record</h2>
+      <p style="color:var(--text-dim); margin-bottom: 2.5rem;">The only tool you need to track your athletic journey, from day one to the draft.</p>
+      <div class="pwa-cta-box">
+        <a href="https://app.forgeathletics.ca" class="pwa-cta-url" target="_blank">app.forgeathletics.ca</a>
+      </div>
+      <br />
+      <a href="https://app.forgeathletics.ca" class="btn-primary" target="_blank">⚡ Open Forge Athletics</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="logo-stacked.png" alt="Forge Athletics Logo">
+    </div>
+    <p>&copy; 2026 Forge Athletics. Built in Canada 🍁</p>
+    <p style="margin-top:1rem;">
+      <a href="mailto:hello@forgeathletics.ca">hello@forgeathletics.ca</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in, .who-card, .feature-card, .step, .metric-card, .pwa-step, .report-preview').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
+
